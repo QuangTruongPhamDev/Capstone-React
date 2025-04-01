@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+.container {
+  width: 80%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.custom-carousel .slick-slide {
+  margin: 0 10px; /* Khoảng cách giữa các thẻ */
+}
+
+.custom-carousel .slick-list {
+  margin: 0 -10px; /* Đảm bảo khoảng cách đều ở hai bên */
+}
+.custom-carousel .slick-prev,
+.custom-carousel .slick-next {
+  display: block !important; /* Buộc hiển thị arrow */
+  z-index: 10; /* Đảm bảo arrow không bị che khuất */
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền dễ nhìn hơn */
+  border-radius: 50%;
+}
+
+.custom-carousel .slick-prev {
+  left: -50px;
+  top: auto; /* Đưa mũi tên sang bên trái */
+}
+
+.custom-carousel .slick-next {
+  right: -50px; /* Đưa mũi tên sang bên phải */
+}

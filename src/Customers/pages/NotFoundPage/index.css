@@ -1,0 +1,83 @@
+/* Đảm bảo lớp phủ trong suốt có độ mờ đúng */
+.absolute-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Lớp phủ đen với độ trong suốt */
+  z-index: 10; /* Đảm bảo lớp phủ nằm trên cùng */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa theo chiều dọc */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  overflow: auto; /* Đảm bảo nội dung không bị tràn ra ngoài */
+  padding: 0 20px; /* Đảm bảo có khoảng cách cho các phần tử bên trong */
+  height: 100%; /* Đảm bảo container chiếm hết chiều cao màn hình */
+}
+
+/* Hiệu ứng sóng */
+.wave-text span {
+  display: inline-block;
+  animation: wave 1.5s ease-in-out infinite;
+  font-size: 6rem; /* Tăng kích thước chữ 404 */
+  font-weight: bold;
+  background: linear-gradient(
+    45deg,
+    #800080,
+    #dda0dd
+  ); /* Gradient từ tím đậm sang tím nhạt */
+  -webkit-background-clip: text; /* Cắt nền theo hình chữ */
+  background-clip: text;
+  color: transparent; /* Đảm bảo chữ sử dụng gradient */
+}
+
+.wave-text span:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.wave-container {
+  display: inline-block;
+}
+
+/* Hiệu ứng sóng */
+@keyframes wave {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Button với gradient luôn hiện */
+.ant-btn {
+  display: inline-block;
+  padding: 12px 24px; /* Điều chỉnh padding để nút có kích thước hợp lý */
+  font-size: 1.25rem; /* Đảm bảo kích thước chữ đủ lớn */
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  background: linear-gradient(
+    45deg,
+    #800080,
+    #dda0dd
+  ); /* Gradient cho button */
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 16px; /* Đảm bảo có khoảng cách với các phần tử phía trên */
+  transition: background 0.3s ease-in-out;
+  max-width: 100%; /* Đảm bảo button không vượt quá kích thước container */
+  width: auto;
+}
+
+.ant-btn:hover {
+  background: linear-gradient(
+    45deg,
+    #dda0dd,
+    #800080
+  ); /* Giữ nguyên gradient khi hover */
+}
