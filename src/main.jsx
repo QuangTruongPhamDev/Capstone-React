@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { configureStore } from "@reduxjs/toolkit";
 // import './index.css'
 import App from "./App.jsx";
-import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./Customers/redux/userSlice.js";
 import bookingSlice from "./Customers/redux/bookingSlice.js";
 import loadingSlice from "./Customers/redux/loadingSlice.js";
