@@ -23,7 +23,6 @@ export default function MovieList() {
       })
   }, []);
 
- 
 
   const handleDelete = async (maPhim) => {
           const confirmDelete = window.confirm("bạn có chắc muốn xóa phim này?");
