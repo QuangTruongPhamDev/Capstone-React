@@ -6,7 +6,6 @@ export default function Header() {
     <div className="sidebar">
       <h2>CyberLearn</h2>
       <ul>
-        test
         <li><a href="#"><i className="fas fa-user" /> Users</a></li>
         <Link to="/AdminPage">
           <li className="active"><span href="#"><i className="fas fa-film" /> Films</span></li>
