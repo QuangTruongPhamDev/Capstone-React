@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSelection } from "../../redux/bookingSlice";
 
@@ -12,8 +12,28 @@ export default function BookingSummary() {
     (total, seat) => total + seat.giaVe,
     0
   );
+
+  // Kiểm tra trạng thái đăng nhập
+  const user = useSelector((state) => state.userSlice.user); // Giả sử người dùng lưu trong redux
+
+  // Trạng thái thông báo
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentError, setPaymentError] = useState(null);
+
+  // Hàm xử lý thanh toán
+  const handlePayment = () => {
+    if (!user) {
+      // Nếu chưa đăng nhập
+      setPaymentError("Vui lòng đăng nhập để thực hiện thanh toán.");
+      setPaymentSuccess(false);
+    } else {
+      // Nếu đã đăng nhập
+      setPaymentSuccess(true);
+      setPaymentError(null);
+    }
+  };
   return (
-    <div>
+    <div className="px-4 py-6 max-w-4xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Thông tin đặt vé</h2>
       {roomData && (
         <div>
@@ -30,7 +50,7 @@ export default function BookingSummary() {
           <p className="mt-4">
             <strong>Ghế đã chọn:</strong>
           </p>
-          <ul>
+          <ul className="list-disc pl-6">
             {selectedSeats.map((seat) => (
               <li key={seat.maGhe}>
                 Ghế {seat.tenGhe} - {seat.giaVe.toLocaleString()}đ
@@ -40,12 +60,31 @@ export default function BookingSummary() {
           <p className="mt-4 text-lg font-bold">
             Tổng tiền: {totalPrice.toLocaleString()}đ
           </p>
-          <button
-            className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            onClick={() => dispatch(resetSelection())}
-          >
-            Đặt lại
-          </button>
+
+          {/* Thông báo lỗi nếu chưa đăng nhập */}
+          {paymentError && <p className="text-red-500 mt-4">{paymentError}</p>}
+
+          {/* Thông báo thành công nếu đã thanh toán */}
+          {paymentSuccess && !paymentError && (
+            <p className="text-green-500 mt-4">
+              Đặt vé thành công! Cảm ơn bạn đã đặt vé.
+            </p>
+          )}
+
+          <div className="mt-4 flex flex-col sm:flex-row sm:space-x-4">
+            <button
+              className="w-full sm:w-auto bg-red-500 text-white px-4 py-2 rounded mb-4 sm:mb-0"
+              onClick={() => dispatch(resetSelection())}
+            >
+              Đặt lại
+            </button>
+            <button
+              className="w-full sm:w-auto bg-green-500 text-white px-4 py-2 rounded"
+              onClick={handlePayment}
+            >
+              Thanh toán
+            </button>
+          </div>
         </div>
       )}
     </div>

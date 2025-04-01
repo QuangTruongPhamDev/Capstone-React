@@ -34,7 +34,7 @@ https.interceptors.response.use(
     // Delay 3 giây trước khi ẩn loading
     setTimeout(() => {
       store.dispatch(hideLoading());
-    }, 2000);
+    }, 1500);
 
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -45,7 +45,7 @@ https.interceptors.response.use(
     // Delay 3 giây trước khi ẩn loading dù có lỗi
     setTimeout(() => {
       store.dispatch(hideLoading());
-    }, 2000);
+    }, 1500);
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

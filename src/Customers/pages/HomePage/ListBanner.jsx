@@ -43,7 +43,7 @@ export default function ListBanner() {
 
   return (
     <div
-      className="relative w-full h-[500px] overflow-hidden rounded-2xl shadow-lg background bg-cover bg-center bg-no-repeat"
+      className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden rounded-2xl shadow-lg bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url('/images/banner_background.jpg')` }}
     >
       {listBanner.map((banner, index) => (
@@ -56,7 +56,7 @@ export default function ListBanner() {
           <img
             src={banner.hinhAnh}
             alt={banner.maBanner}
-            className="w-full h-full object-contain rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
           />
         </div>
       ))}
@@ -64,14 +64,14 @@ export default function ListBanner() {
       {/* Arrow Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-40 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-3 rounded-full text-3xl"
+        className="absolute top-1/2 left-4 sm:left-8 md:left-16 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-3 rounded-full text-2xl sm:text-3xl"
       >
         <LeftOutlined />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-40 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-3 rounded-full text-3xl"
+        className="absolute top-1/2 right-4 sm:right-8 md:right-16 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-3 rounded-full text-2xl sm:text-3xl"
       >
         <RightOutlined />
       </button>

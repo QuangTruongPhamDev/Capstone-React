@@ -18,7 +18,7 @@ export default function DetailMovieCinemaList() {
   return (
     <div className="mx-auto py-10 px-4 grid grid-cols-12 gap-6">
       {/* Cột 1: Logo Hệ Thống Rạp */}
-      <div className="col-span-4 border-r pr-4 space-y-4">
+      <div className="col-span-12 sm:col-span-4 border-b sm:border-r sm:pr-4 space-y-4 mb-6 sm:mb-0">
         {cinemaList.map((cinema) => (
           <div
             key={cinema.maHeThongRap}
@@ -40,12 +40,12 @@ export default function DetailMovieCinemaList() {
       </div>
 
       {/* Cột 2: Lịch Chiếu */}
-      <div className="col-span-8">
+      <div className="col-span-12 sm:col-span-8">
         {selectedCinema &&
           selectedCinema.cumRapChieu.map((cumRap) => (
             <div key={cumRap.maCumRap} className="mb-6">
               <h3 className="text-lg font-bold mb-2">{cumRap.tenCumRap}</h3>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {cumRap.lichChieuPhim.map((lichChieu) => (
                   <Link
                     to={`/chitietphongve/${lichChieu.maLichChieu}`}

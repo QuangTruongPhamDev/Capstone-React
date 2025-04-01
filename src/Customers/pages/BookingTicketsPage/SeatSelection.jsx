@@ -24,7 +24,7 @@ export default function SeatSelection() {
       </div>
 
       {/* Ghế ngồi */}
-      <div className="grid grid-cols-10 gap-3">
+      <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-3">
         {seats.map((seat) => (
           <button
             key={seat.maGhe}
@@ -46,20 +46,20 @@ export default function SeatSelection() {
       </div>
 
       {/* Chú thích màu sắc */}
-      <div className="flex justify-center space-x-6 mt-6">
-        <div className="flex items-center">
+      <div className="flex flex-wrap justify-center space-x-6 mt-6">
+        <div className="flex items-center mb-2">
           <div className="w-5 h-5 bg-blue-500 rounded-md mr-2"></div>
           <span>Ghế Thường</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center mb-2">
           <div className="w-5 h-5 bg-yellow-500 rounded-md mr-2"></div>
           <span>Ghế VIP</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center mb-2">
           <div className="w-5 h-5 bg-green-500 rounded-md mr-2"></div>
           <span>Đang chọn</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center mb-2">
           <div className="w-5 h-5 bg-gray-500 rounded-md mr-2"></div>
           <span>Ghế đã đặt</span>
         </div>

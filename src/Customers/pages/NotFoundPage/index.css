@@ -1,23 +1,23 @@
-/* Đảm bảo lớp phủ trong suốt có độ mờ đúng */
-.absolute-cover {
+/* Chỉ áp dụng kiểu cho các phần tử trong trang NotFoundPage */
+.not-found-page .absolute-cover {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Lớp phủ đen với độ trong suốt */
-  z-index: 10; /* Đảm bảo lớp phủ nằm trên cùng */
+  z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Căn giữa theo chiều dọc */
   align-items: center; /* Căn giữa theo chiều ngang */
-  overflow: auto; /* Đảm bảo nội dung không bị tràn ra ngoài */
-  padding: 0 20px; /* Đảm bảo có khoảng cách cho các phần tử bên trong */
-  height: 100%; /* Đảm bảo container chiếm hết chiều cao màn hình */
+  overflow: auto;
+  padding: 0 20px;
+  height: 100%;
 }
 
 /* Hiệu ứng sóng */
-.wave-text span {
+.not-found-page .wave-text span {
   display: inline-block;
   animation: wave 1.5s ease-in-out infinite;
   font-size: 6rem; /* Tăng kích thước chữ 404 */
@@ -27,16 +27,16 @@
     #800080,
     #dda0dd
   ); /* Gradient từ tím đậm sang tím nhạt */
-  -webkit-background-clip: text; /* Cắt nền theo hình chữ */
+  -webkit-background-clip: text;
   background-clip: text;
   color: transparent; /* Đảm bảo chữ sử dụng gradient */
 }
 
-.wave-text span:nth-child(odd) {
+.not-found-page .wave-text span:nth-child(odd) {
   animation-delay: 0.5s;
 }
 
-.wave-container {
+.not-found-page .wave-container {
   display: inline-block;
 }
 
@@ -54,10 +54,10 @@
 }
 
 /* Button với gradient luôn hiện */
-.ant-btn {
+.not-found-page .ant-btn {
   display: inline-block;
-  padding: 12px 24px; /* Điều chỉnh padding để nút có kích thước hợp lý */
-  font-size: 1.25rem; /* Đảm bảo kích thước chữ đủ lớn */
+  padding: 12px 24px;
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
   color: white;
@@ -68,13 +68,13 @@
   ); /* Gradient cho button */
   border-radius: 8px;
   text-decoration: none;
-  margin-top: 16px; /* Đảm bảo có khoảng cách với các phần tử phía trên */
+  margin-top: 16px;
   transition: background 0.3s ease-in-out;
   max-width: 100%; /* Đảm bảo button không vượt quá kích thước container */
   width: auto;
 }
 
-.ant-btn:hover {
+.not-found-page .ant-btn:hover {
   background: linear-gradient(
     45deg,
     #dda0dd,

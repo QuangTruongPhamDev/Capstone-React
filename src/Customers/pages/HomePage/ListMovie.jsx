@@ -85,8 +85,43 @@ export default function ListMovie() {
           showSizeChanger={false}
           hideOnSinglePage
           onChange={(page) => setCurrentPage(page)}
+          className="pagination-custom"
         />
       </div>
+      <style jsx>{`
+        .pagination-custom .ant-pagination-item {
+          background-color: transparent;
+          border-color: white;
+          color: white;
+        }
+        .pagination-custom .ant-pagination-item:hover {
+          background-color: #4b4b4b;
+        }
+        .pagination-custom .ant-pagination-item-active {
+          background-color: #f56a00;
+          border-color: #f56a00;
+        }
+        .pagination-custom .ant-pagination-prev,
+        .pagination-custom .ant-pagination-next {
+          color: white;
+        }
+        .pagination-custom .ant-pagination-prev:hover,
+        .pagination-custom .ant-pagination-next:hover {
+          background-color: #4b4b4b;
+        }
+
+        /* Thay đổi màu mũi tên khi hover */
+        .pagination-custom .ant-pagination-prev .ant-pagination-item-link,
+        .pagination-custom .ant-pagination-next .ant-pagination-item-link {
+          color: white;
+        }
+        .pagination-custom .ant-pagination-prev:hover .ant-pagination-item-link,
+        .pagination-custom
+          .ant-pagination-next:hover
+          .ant-pagination-item-link {
+          color: #f56a00;
+        }
+      `}</style>
     </div>
   );
 }

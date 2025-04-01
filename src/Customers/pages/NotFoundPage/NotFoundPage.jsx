@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function NotFoundPage() {
   return (
     <div
-      className="w-full h-screen bg-cover bg-center"
+      className="w-full h-screen bg-cover bg-center not-found-page"
       style={{ backgroundImage: `url('/images/background_app.jpg')` }} // Đổi ảnh nền ở đây
     >
       {/* Lớp phủ trong suốt */}

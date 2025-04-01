@@ -23,13 +23,13 @@ export default function BookingTicketsPage() {
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center pt-20"
       style={{ backgroundImage: "url('/images/background_booking.jpg')" }} // Cập nhật đường dẫn ảnh
     >
-      <div className="relative flex p-6 w-4/5 space-x-6 mt-12">
+      <div className="relative flex flex-col sm:flex-row p-6 w-4/5 space-y-6 sm:space-y-0 sm:space-x-6 mt-12">
         {roomData ? (
           <>
-            <div className="w-3/4 p-4 bg-white shadow-lg rounded-lg">
+            <div className="w-full sm:w-3/4 p-4 bg-white shadow-lg rounded-lg">
               <SeatSelection seats={roomData.danhSachGhe} />
             </div>
-            <div className="w-1/4 p-4 bg-white shadow-lg rounded-lg">
+            <div className="w-full sm:w-1/4 p-4 bg-white shadow-lg rounded-lg">
               <BookingSummary roomData={roomData} />
             </div>
           </>

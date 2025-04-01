@@ -18,74 +18,76 @@ export default function DetailMoviePage() {
 
   if (!movie) return <p>Loading...</p>;
   return (
-    <div className="container mx-auto py-10 px-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        {/* Movie Poster */}
-        <div className="relative">
-          <img
-            src={movie.hinhAnh}
-            alt={movie.tenPhim}
-            className="rounded-lg shadow-lg w-full"
-          />
-        </div>
-
-        {/* Movie Info */}
-        <div className="md:col-span-2">
-          <h1 className="text-3xl font-bold mb-4">{movie.tenPhim}</h1>
-          <p className="text-gray-700 mb-4">{movie.moTa}</p>
-          <p className="text-red-500 font-semibold mb-4">
-            Ngày khởi chiếu:{" "}
-            {new Date(movie.ngayKhoiChieu).toLocaleDateString()}
-          </p>
-          {/* Movie Status */}
-          <p className="text-green-500 font-semibold mb-4">
-            Tình trạng:{" "}
-            {movie.dangChieu
-              ? "Đang chiếu"
-              : movie.sapChieu
-              ? "Sắp chiếu"
-              : "Chưa có thông tin"}
-          </p>
-
-          {/* Rating */}
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-lg font-semibold">Đánh giá:</span>
-            <Rate allowHalf value={movie.danhGia / 2} disabled />
+    <div className="min-h-screen bg-gray-900 text-white">
+      <div className="container mx-auto py-10 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          {/* Movie Poster */}
+          <div className="relative">
+            <img
+              src={movie.hinhAnh}
+              alt={movie.tenPhim}
+              className="rounded-lg shadow-lg w-full"
+            />
           </div>
 
-          {/* Trailer Button */}
-          <button
-            onClick={() => setIsTrailerOpen(true)}
-            className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg flex items-center gap-2"
-          >
-            <PlayCircleOutlined className="text-2xl" /> Trailer
-          </button>
-        </div>
-      </div>
+          {/* Movie Info */}
+          <div className="md:col-span-2">
+            <h1 className="text-3xl font-bold mb-4">{movie.tenPhim}</h1>
+            <p className="text-gray-300 mb-4">{movie.moTa}</p>
+            <p className="text-red-500 font-semibold mb-4">
+              Ngày khởi chiếu:{" "}
+              {new Date(movie.ngayKhoiChieu).toLocaleDateString()}
+            </p>
+            {/* Movie Status */}
+            <p className="text-green-500 font-semibold mb-4">
+              Tình trạng:{" "}
+              {movie.dangChieu
+                ? "Đang chiếu"
+                : movie.sapChieu
+                ? "Sắp chiếu"
+                : "Chưa có thông tin"}
+            </p>
 
-      {/* Trailer Modal */}
-      <Modal
-        open={isTrailerOpen}
-        footer={null}
-        onCancel={() => setIsTrailerOpen(false)}
-        centered
-      >
-        {movie.trailer ? (
-          <iframe
-            width="100%"
-            height="400"
-            src={movie.trailer.replace("watch?v=", "embed/")}
-            title={movie.tenPhim}
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        ) : (
-          <p className="text-center text-red-500">
-            Không có trailer cho phim này
-          </p>
-        )}
-      </Modal>
-      <DetailMovieCinemaList />
+            {/* Rating */}
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg font-semibold">Đánh giá:</span>
+              <Rate allowHalf value={movie.danhGia / 2} disabled />
+            </div>
+
+            {/* Trailer Button */}
+            <button
+              onClick={() => setIsTrailerOpen(true)}
+              className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+            >
+              <PlayCircleOutlined className="text-2xl" /> Trailer
+            </button>
+          </div>
+        </div>
+
+        {/* Trailer Modal */}
+        <Modal
+          open={isTrailerOpen}
+          footer={null}
+          onCancel={() => setIsTrailerOpen(false)}
+          centered
+        >
+          {movie.trailer ? (
+            <iframe
+              width="100%"
+              height="400"
+              src={movie.trailer.replace("watch?v=", "embed/")}
+              title={movie.tenPhim}
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <p className="text-center text-red-500">
+              Không có trailer cho phim này
+            </p>
+          )}
+        </Modal>
+        <DetailMovieCinemaList />
+      </div>
     </div>
   );
 }
