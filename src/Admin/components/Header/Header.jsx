@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   return (
     <div className="sidebar">
       <h2>CyberLearn</h2>
       <ul>
+        test
         <li><a href="#"><i className="fas fa-user" /> Users</a></li>
         <Link to="/AdminPage">
-        <li className="active"><span href="#"><i className="fas fa-film" /> Films</span></li>
+          <li className="active"><span href="#"><i className="fas fa-film" /> Films</span></li>
         </Link>
         <Link to="/UpdateNewFilmPage">
           <li><span href="#"><i className="fas fa-film" /> Update Films</span></li>
