@@ -1,0 +1,92 @@
+/* Container chính */
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url("/images/background_app.jpg") no-repeat center center fixed;
+  background-size: cover;
+  padding: 4rem;
+}
+
+/* Chứa cả Animation và Form */
+.register-header {
+  display: flex;
+  flex-direction: column; /* Chế độ column mặc định trên di động */
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Điều chỉnh Animation */
+.register-animation {
+  width: 100%;
+  max-width: 500px; /* Chỉnh độ rộng của Animation */
+  margin-bottom: 2rem; /* Khoảng cách dưới */
+}
+
+.register-animation .lottie {
+  width: 100%;
+  height: auto;
+}
+
+/* Điều chỉnh Form */
+.register-form {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Ghi đè màu chữ của label */
+.register-form .ant-form-item .ant-form-item-label > label {
+  color: white !important; /* Dùng !important để đảm bảo ghi đè */
+}
+.register-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f97316;
+  margin-bottom: 1.5rem;
+}
+
+.register-input {
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 8px !important;
+  margin-bottom: 1rem !important;
+}
+
+.register-button {
+  width: 100%;
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
+  padding: 12px;
+}
+
+.register-button:hover {
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
+}
+
+.register-link {
+  color: #f97316 !important;
+  text-decoration: none !important;
+}
+
+.register-link:hover {
+  color: #ea580c !important;
+}
+
+/* Đảm bảo responsive trên các màn hình nhỏ */
+@media (min-width: 768px) {
+  .register-header {
+    flex-direction: row; /* Chuyển sang dạng row trên các màn hình lớn */
+  }
+  .register-animation {
+    margin-bottom: 0; /* Không có khoảng cách dưới nữa */
+  }
+}

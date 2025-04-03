@@ -3,13 +3,16 @@ import { useDispatch } from "react-redux";
 import { getListMovieService } from "../../api/movieService";
 import { Link } from "react-router-dom";
 import { Button, Card, Carousel, Pagination, Popover } from "antd";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
 export default function ListMovie() {
   let [listMovie, setListMovie] = useState([]);
   let [currentPage, setCurrentPage] = useState(1);
+  const [category, setCategory] = useState("dangChieu");
   let dispatch = useDispatch();
+  const moviesPerPage = 8; // 4 phim mỗi dòng * 2 dòng
 
   useEffect(() => {
     getListMovieService()
@@ -21,9 +24,23 @@ export default function ListMovie() {
       });
   }, []);
 
+  // Lọc danh sách phim theo danh mục
+  const filteredMovies = listMovie.filter((movie) => {
+    if (category === "hot") return movie.hot;
+    if (category === "dangChieu") return movie.dangChieu;
+    if (category === "sapChieu") return movie.sapChieu;
+    return true;
+  });
+  // Tính tổng số trang
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredMovies.length / moviesPerPage)
+  );
+
+  // Render danh sách phim theo trang
   const renderListMovie = () => {
-    return listMovie
-      .slice((currentPage - 1) * 8, currentPage * 8)
+    return filteredMovies
+      .slice((currentPage - 1) * moviesPerPage, currentPage * moviesPerPage)
       .map((movie) => {
         const desc = (
           <div className="w-80 bg-black text-white p-3 rounded-2xl">
@@ -58,70 +75,70 @@ export default function ListMovie() {
                 </button>
               </Popover>
             </div>
-
-            {/* Tiêu đề phim */}
-            <Meta
-              title={
-                <div className="text-center font-bold">{movie.tenPhim}</div>
-              }
-            />
           </div>
         );
       });
   };
 
   return (
-    <div className="container">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {renderListMovie()}
+    <div className="container relative">
+      {/* Danh Mục (Căn Lề Trái Theo List Phim) */}
+      <div className="flex gap-4 mb-5 px-4 sm:px-8 md:px-12">
+        <button
+          className="px-6 py-2 rounded-md text-lg font-bold bg-red-600 text-white shadow-lg shadow-red-500/50 animate-pulse"
+          onClick={() => setCategory("hot")}
+        >
+          Phim Hot
+        </button>
+        <button
+          className={`px-6 py-2 rounded-md text-lg font-bold ${
+            category === "dangChieu" ? "bg-orange-500" : "bg-gray-700"
+          }`}
+          onClick={() => setCategory("dangChieu")}
+        >
+          Phim Đang Chiếu
+        </button>
+        <button
+          className={`px-6 py-2 rounded-md text-lg font-bold ${
+            category === "sapChieu" ? "bg-orange-500" : "bg-gray-700"
+          }`}
+          onClick={() => setCategory("sapChieu")}
+        >
+          Phim Sắp Chiếu
+        </button>
       </div>
 
-      {/* Pagination More với căn giữa */}
-      <div className="flex justify-center mt-10">
-        <Pagination
-          current={currentPage}
-          pageSize={8}
-          total={listMovie.length}
-          showSizeChanger={false}
-          hideOnSinglePage
-          onChange={(page) => setCurrentPage(page)}
-          className="pagination-custom"
-        />
-      </div>
-      <style jsx>{`
-        .pagination-custom .ant-pagination-item {
-          background-color: transparent;
-          border-color: white;
-          color: white;
-        }
-        .pagination-custom .ant-pagination-item:hover {
-          background-color: #4b4b4b;
-        }
-        .pagination-custom .ant-pagination-item-active {
-          background-color: #f56a00;
-          border-color: #f56a00;
-        }
-        .pagination-custom .ant-pagination-prev,
-        .pagination-custom .ant-pagination-next {
-          color: white;
-        }
-        .pagination-custom .ant-pagination-prev:hover,
-        .pagination-custom .ant-pagination-next:hover {
-          background-color: #4b4b4b;
-        }
+      {/* Danh Sách Phim + Arrow */}
+      <div className="relative flex items-center">
+        {/* Arrow Trái - luôn hiển thị nhưng sẽ mờ đi khi không thể di chuyển trang trước */}
+        <button
+          className={`absolute left-0 z-10 bg-black/50 text-white p-2 rounded-full shadow-lg hover:bg-black transition-all ${
+            currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)} // Chỉ giảm trang khi có thể
+          disabled={currentPage === 1} // Disabled khi ở trang đầu tiên
+        >
+          <LeftOutlined />
+        </button>
 
-        /* Thay đổi màu mũi tên khi hover */
-        .pagination-custom .ant-pagination-prev .ant-pagination-item-link,
-        .pagination-custom .ant-pagination-next .ant-pagination-item-link {
-          color: white;
-        }
-        .pagination-custom .ant-pagination-prev:hover .ant-pagination-item-link,
-        .pagination-custom
-          .ant-pagination-next:hover
-          .ant-pagination-item-link {
-          color: #f56a00;
-        }
-      `}</style>
+        {/* Danh Sách Phim */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 flex-1">
+          {renderListMovie()}
+        </div>
+
+        {/* Arrow Phải - luôn hiển thị nhưng sẽ mờ đi khi không thể di chuyển trang tiếp */}
+        <button
+          className={`absolute right-0 z-10 bg-black/50 text-white p-2 rounded-full shadow-lg hover:bg-black transition-all ${
+            currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={() =>
+            currentPage < totalPages && setCurrentPage(currentPage + 1)
+          } // Chỉ tăng trang khi có thể
+          disabled={currentPage === totalPages} // Disabled khi ở trang cuối
+        >
+          <RightOutlined />
+        </button>
+      </div>
     </div>
   );
 }

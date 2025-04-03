@@ -16,7 +16,6 @@ import AddNewFilmPage from "./Admin/pages/AddNewFilmPage/AddNewFilmPage";
 import UpdateNewFilmPage from "./Admin/pages/UpdateNewFilmPage/UpdateNewFilmPage";
 import Template_Admin from "./Admin/template_admin/template_admin";
 
-
 function App() {
   return (
     <div>
@@ -38,9 +37,18 @@ function App() {
             path="/chitietphongve/:maLichChieu"
             element={<Template_Booking content={<BookingTicketsPage />} />}
           />
-          <Route path="/AdminPage" element={<Template_Admin content={<AdminPage />} />} />
-          <Route path="/AddNewFilmPage" element={<Template_Admin content={<AddNewFilmPage />} />} />
-          <Route path="/UpdateNewFilmPage" element={<Template_Admin content={<UpdateNewFilmPage />} />} />
+          <Route
+            path="/AdminPage"
+            element={<Template_Admin content={<AdminPage />} />}
+          />
+          <Route
+            path="/AddNewFilmPage"
+            element={<Template_Admin content={<AddNewFilmPage />} />}
+          />
+          <Route
+            path="/UpdateNewFilmPage"
+            element={<Template_Admin content={<UpdateNewFilmPage />} />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
