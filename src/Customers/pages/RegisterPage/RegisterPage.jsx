@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { registerUserService } from "../../api/userService";
 import { Button, Form, Input, message } from "antd";
 import { saveUser } from "../../redux/userSlice";
-import registerAnimation from "../../../assets/register_animation.json";
+import registerAnimation from "../../../assets/register-animation.json";
 import Lottie from "lottie-react";
 import "./index.css";
+
 export default function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
+      console.log("Dữ liệu gửi đi: ", values); // In ra dữ liệu trước khi gửi
       values.maNhom = "GP01"; // Nhóm mặc định
       await registerUserService(values); // Gọi API đăng ký
 
@@ -21,7 +23,16 @@ export default function RegisterPage() {
       // Chuyển hướng đến trang đăng nhập sau 1s
       setTimeout(() => navigate("/login"), 1000);
     } catch (error) {
-      message.error(error.response?.data?.content || "Đăng ký thất bại!");
+      // Kiểm tra lỗi API trả về
+      if (error.response) {
+        const errorMessage =
+          error.response.data?.content || "Đăng ký thất bại!";
+        message.error(errorMessage); // Hiển thị thông báo lỗi
+      } else if (error.request) {
+        message.error("Không thể kết nối với máy chủ. Vui lòng thử lại!");
+      } else {
+        message.error("Đã xảy ra lỗi. Vui lòng thử lại!");
+      }
     }
   };
   return (
@@ -37,7 +48,7 @@ export default function RegisterPage() {
 
         {/* Form Register */}
         <div className="register-form w-full md:w-1/3">
-          <h2 className="register-title text-2xl font-bold text-white mb-6 text-center">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">
             Đăng ký tài khoản
           </h2>
           <Form layout="vertical" onFinish={onFinish}>
@@ -52,6 +63,7 @@ export default function RegisterPage() {
             <Form.Item
               name="taiKhoan"
               label="Tài khoản"
+              labelCol={{ style: { color: "white" } }}
               rules={[{ required: true, message: "Vui lòng nhập tài khoản!" }]}
             >
               <Input className="register-input" />
@@ -60,6 +72,7 @@ export default function RegisterPage() {
             <Form.Item
               name="matKhau"
               label="Mật khẩu"
+              labelCol={{ style: { color: "white" } }}
               rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
             >
               <Input.Password className="register-input" />
@@ -68,6 +81,7 @@ export default function RegisterPage() {
             <Form.Item
               name="email"
               label="Email"
+              labelCol={{ style: { color: "white" } }}
               rules={[
                 {
                   type: "email",
@@ -82,6 +96,7 @@ export default function RegisterPage() {
             <Form.Item
               name="soDt"
               label="Số điện thoại"
+              labelCol={{ style: { color: "white" } }}
               rules={[
                 { required: true, message: "Vui lòng nhập số điện thoại!" },
               ]}

@@ -131,7 +131,7 @@ export default function CinemaList() {
                         <Link
                           to={`/chitietphongve/${lichChieu.maLichChieu}`}
                           key={lichChieu.maLichChieu}
-                          className="bg-white text-orange-500 px-2 py-1 rounded flex items-center cursor-pointer hover:bg-orange-500 hover:text-white transition duration-200"
+                          className="bg-white text-orange-500 px-2 py-1 rounded flex items-center cursor-pointer hover:bg-orange-300 hover:text-white transition duration-200"
                         >
                           {`${day}/${month}/${year}`}
                           <span className="text-orange-500 mx-2">~</span>

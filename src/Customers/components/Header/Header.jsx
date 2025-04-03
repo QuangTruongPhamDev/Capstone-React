@@ -71,19 +71,19 @@ export default function Header() {
       <nav className="flex sm:space-x-8 space-x-4 text-white font-semibold text-lg hidden sm:flex">
         <button
           onClick={() => handleNavigateAndScroll("list-movie")}
-          className="cursor-pointer hover:text-red-500 transition"
+          className="cursor-pointer hover:text-orange-500 transition"
         >
           Lịch chiếu
         </button>
         <button
           onClick={() => handleNavigateAndScroll("cinema-list")}
-          className="cursor-pointer hover:text-red-500 transition"
+          className="cursor-pointer hover:text-orange-500 transition"
         >
           Cụm rạp
         </button>
         <button
           onClick={() => handleNavigateAndScroll("download-app")}
-          className="cursor-pointer hover:text-red-500 transition"
+          className="cursor-pointer hover:text-orange-500 transition"
         >
           Ứng dụng
         </button>
@@ -103,19 +103,19 @@ export default function Header() {
           {/* Các mục menu */}
           <button
             onClick={() => handleNavigateAndScroll("list-movie")}
-            className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+            className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
           >
             Lịch chiếu
           </button>
           <button
             onClick={() => handleNavigateAndScroll("cinema-list")}
-            className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+            className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
           >
             Cụm rạp
           </button>
           <button
             onClick={() => handleNavigateAndScroll("download-app")}
-            className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+            className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
           >
             Ứng dụng
           </button>
@@ -125,7 +125,7 @@ export default function Header() {
             <>
               <Link
                 to="/edit-profile"
-                className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+                className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
               >
                 Chỉnh sửa thông tin cá nhân
               </Link>
@@ -140,13 +140,13 @@ export default function Header() {
             <>
               <Link
                 to="/login"
-                className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+                className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
               >
                 Đăng nhập
               </Link>
               <Link
                 to="/register"
-                className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+                className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
               >
                 Đăng ký
               </Link>
@@ -158,7 +158,7 @@ export default function Header() {
       {/* Avatar & Dropdown for larger screens */}
       <div className="hidden sm:flex items-center space-x-6 relative">
         <div
-          className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 cursor-pointer"
+          className="w-12 h-12 rounded-full overflow-hidden border-2 border-orange-500 cursor-pointer"
           onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle menu for small screens
         >
           <img
@@ -174,7 +174,7 @@ export default function Header() {
               <>
                 <Link
                   to="/edit-profile"
-                  className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+                  className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
                 >
                   Chỉnh sửa thông tin cá nhân
                 </Link>
@@ -189,13 +189,13 @@ export default function Header() {
               <>
                 <Link
                   to="/login"
-                  className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+                  className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
                 >
                   Đăng nhập
                 </Link>
                 <Link
                   to="/register"
-                  className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-blue-500 transition"
+                  className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
                 >
                   Đăng ký
                 </Link>

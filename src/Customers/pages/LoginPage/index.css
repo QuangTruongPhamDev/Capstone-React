@@ -1,0 +1,24 @@
+/* Chỉ áp dụng CSS này khi ở trong trang Login */
+.login-page .ant-btn-primary {
+  background-color: #f97316 !important; /* Màu cam */
+  border-color: #f97316 !important;
+}
+
+.login-page .ant-btn-primary:hover,
+.login-page .ant-btn-primary:focus {
+  background-color: #ea580c !important; /* Màu cam đậm khi hover */
+  border-color: #ea580c !important;
+}
+
+.login-page .ant-btn-primary:hover,
+.login-page .ant-btn-primary:focus {
+  background-color: #ea580c !important; /* Màu cam đậm khi hover */
+  border-color: #ea580c !important;
+}
+.login-page .ant-btn-link {
+  color: #f97316 !important;
+}
+.login-page .ant-btn-link:hover {
+  color: #ea580c !important;
+  transition: color 0.3 ease !important;
+}

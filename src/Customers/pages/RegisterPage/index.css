@@ -6,7 +6,7 @@
   min-height: 100vh;
   background: url("/images/background_app.jpg") no-repeat center center fixed;
   background-size: cover;
-  padding: 2rem;
+  padding: 4rem;
 }
 
 /* Chứa cả Animation và Form */
@@ -57,6 +57,11 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-bottom: 1rem;
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 8px !important;
+  margin-bottom: 1rem !important;
 }
 
 .register-button {
@@ -64,17 +69,23 @@
   background-color: #f97316;
   border-color: #f97316;
   color: white;
+  background-color: #f97316 !important;
+  border-color: #f97316 !important;
+  color: white !important;
   padding: 12px;
 }
 
 .register-button:hover {
   background-color: #ea580c;
   border-color: #ea580c;
+  background-color: #ea580c !important;
+  border-color: #ea580c !important;
 }
 
 .register-link {
   color: #f97316 !important;
   text-decoration: none;
+  text-decoration: none !important;
 }
 
 .register-link:hover {
