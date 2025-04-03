@@ -49,18 +49,18 @@ export default function CinemaList() {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-4 bg-gray-900 text-white border border-gray-700">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-800 text-white border border-gray-700">
       {/* Cột 1: Hệ thống rạp */}
-      <div className="border-r border-gray-700">
+      <div className="border-r border-gray-700 overflow-auto max-h-[500px]">
         {cinemaSystems.map((system) => (
           <div
             key={system.maHeThongRap}
             className={`p-2 flex items-center gap-2 cursor-pointer border-b border-gray-700 relative 
-        ${
-          selectedSystem === system.maHeThongRap
-            ? "border-r-4 border-green-500"
-            : "hover:border-r-4 hover:border-gray-500"
-        }`}
+          ${
+            selectedSystem === system.maHeThongRap
+              ? "border-r-4 border-orange-500 bg-gray-700"
+              : "hover:border-r-4 hover:border-gray-500"
+          }`}
             onClick={() => handleSelectSystem(system.maHeThongRap)}
           >
             <img
@@ -74,19 +74,19 @@ export default function CinemaList() {
       </div>
 
       {/* Cột 2: Cụm rạp */}
-      <div className="border-r border-gray-700">
+      <div className="border-r border-gray-700 overflow-auto max-h-[500px]">
         {cinemaClusters.map((cluster) => (
           <div
             key={cluster.maCumRap}
             className={`p-2 cursor-pointer border-b border-gray-700 relative 
-        ${
-          selectedCluster === cluster.maCumRap
-            ? "border-r-4 border-green-500"
-            : "hover:border-r-4 hover:border-gray-500"
-        }`}
+          ${
+            selectedCluster === cluster.maCumRap
+              ? "border-r-4 border-orange-500 bg-gray-700"
+              : "hover:border-r-4 hover:border-gray-500"
+          }`}
             onClick={() => handleSelectCluster(cluster.maCumRap)}
           >
-            <p className="font-bold text-green-400 truncate">
+            <p className="font-bold text-orange-400 truncate">
               {cluster.tenCumRap}
             </p>
             <p className="text-sm text-gray-400 truncate">{cluster.diaChi}</p>
@@ -94,26 +94,26 @@ export default function CinemaList() {
         ))}
       </div>
 
-      {/* Cột 3: Lịch chiếu - có thanh cuộn */}
+      {/* Cột 3: Lịch chiếu */}
       <div className="h-[400px] overflow-y-auto p-2">
         {showtimes.length > 0 ? (
           showtimes.map((phim) => (
             <div
               key={phim.maPhim}
-              className="p-4 border-b border-gray-700 flex"
+              className="p-4 border-b border-gray-700 flex flex-col md:flex-row"
             >
               {/* Hình ảnh phim */}
               {phim.hinhAnh && (
                 <img
                   src={phim.hinhAnh}
                   alt={phim.tenPhim}
-                  className="w-24 h-32 object-cover rounded-md mr-4"
+                  className="w-20 h-28 object-cover rounded-md mr-4"
                 />
               )}
               <div>
                 {/* Tên phim */}
                 <p className="font-bold text-lg flex items-center">
-                  <span className="bg-red-600 text-white px-2 py-1 rounded mr-2">
+                  <span className="bg-red-500 text-white px-2 py-1 rounded-full mr-2">
                     C18
                   </span>
                   {phim.tenPhim}
@@ -129,13 +129,13 @@ export default function CinemaList() {
 
                       return (
                         <Link
-                          to={`/chitietphongve/${lichChieu.maLichChieu}`} // Chuyển hướng đến trang đặt vé
+                          to={`/chitietphongve/${lichChieu.maLichChieu}`}
                           key={lichChieu.maLichChieu}
-                          className="bg-gray-100 text-green-600 px-2 py-1 rounded flex items-center cursor-pointer hover:bg-green-500 hover:text-white transition duration-200"
+                          className="bg-white text-orange-500 px-2 py-1 rounded flex items-center cursor-pointer hover:bg-orange-500 hover:text-white transition duration-200"
                         >
                           {`${day}/${month}/${year}`}
-                          <span className="text-green-600 mx-2">~</span>
-                          <span className="text-red-500">
+                          <span className="text-orange-500 mx-2">~</span>
+                          <span className="text-red-500 font-bold">
                             {time.slice(0, 5)}
                           </span>
                         </Link>
