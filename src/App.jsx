@@ -11,6 +11,11 @@ import LoadingPage from "./Customers/components/Loading/LoadingPage";
 import RegisterPage from "./Customers/pages/RegisterPage/RegisterPage";
 import Template_Booking from "./Customers/template_customer/Template_Booking";
 import BookingTicketsPage from "./Customers/pages/BookingTicketsPage/BookingTicketsPage";
+import AdminPage from "./Admin/pages/AdminPage/AdminPage";
+import AddNewFilmPage from "./Admin/pages/AddNewFilmPage/AddNewFilmPage";
+import UpdateNewFilmPage from "./Admin/pages/UpdateNewFilmPage/UpdateNewFilmPage";
+import Template_Admin from "./Admin/template_admin/template_admin";
+
 
 function App() {
   return (
@@ -33,6 +38,9 @@ function App() {
             path="/chitietphongve/:maLichChieu"
             element={<Template_Booking content={<BookingTicketsPage />} />}
           />
+          <Route path="/AdminPage" element={<Template_Admin content={<AdminPage />} />} />
+          <Route path="/AddNewFilmPage" element={<Template_Admin content={<AddNewFilmPage />} />} />
+          <Route path="/UpdateNewFilmPage" element={<Template_Admin content={<UpdateNewFilmPage />} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

@@ -1,0 +1,37 @@
+.header-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+}
+.header-sidebar {
+    width: 200px;
+    background: #0b213f;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+}
+.header-sidebar .header-h2 {
+    text-align: center;
+}
+.header-sidebar .header-ul {
+    list-style: none;
+    padding: 0;
+}
+.header-sidebar .header-ul .header-li {
+    padding: 10px;
+}
+.header-sidebar .header-ul .header-li .header-span {
+    color: white;
+    text-decoration:  none;
+}
+.header-logo {
+    display: flex;
+    justify-content: center; /* Căn giữa */
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo-img {
+    width: 120px; /* Điều chỉnh kích thước logo */
+    height: auto;
+}
