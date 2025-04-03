@@ -24,7 +24,7 @@ export default function DownloadApp() {
             Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp và
             đổi quà hấp dẫn.
           </p>
-          <p className="font-bold text-red-500 mb-6">
+          <p className="font-bold text-orange-500 mb-6">
             APP MIỄN PHÍ - TẢI VỀ NGAY!
           </p>
         </div>
