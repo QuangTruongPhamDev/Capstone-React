@@ -13,7 +13,6 @@ export default function ListMovie() {
   let [currentPage, setCurrentPage] = useState(1);
   let [category, setCategory] = useState("hot");
   let dispatch = useDispatch();
-  const moviesPerPage = 8; // 4 phim mỗi dòng * 2 dòng
 
   useEffect(() => {
     getListMovieService()
