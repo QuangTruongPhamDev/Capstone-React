@@ -7,12 +7,14 @@ import userSlice from "./Customers/redux/userSlice.js";
 import bookingSlice from "./Customers/redux/bookingSlice.js";
 import loadingSlice from "./Customers/redux/loadingSlice.js";
 import { Provider } from "react-redux";
+import movieSlice from "./Admin/redux/movieSlice.js"
 
 export const store = configureStore({
   reducer: {
     userSlice: userSlice,
     bookingSlice: bookingSlice,
     loadingSlice: loadingSlice,
+    movieSlice: movieSlice,
   },
 });
 

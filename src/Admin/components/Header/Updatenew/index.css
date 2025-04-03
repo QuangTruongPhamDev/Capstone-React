@@ -1,44 +1,60 @@
-body {
-    display: flex;
+.Updatenew-body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Giúp căn giữa theo chiều dọc */
+    background: #f4f4f4;
 }
 
-.content {
-    flex-grow: 1;
+.Updatenew-content {
+    background: white;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* Giữ form trong một khung vừa phải */
 }
-h3 {
+
+.Updatenew-h3 {
     text-align: center;
-    margin-left: 200px;
     padding-bottom: 20px;
-    padding-top: 10px;
 }
-form {
+
+.Updatenew-form {
     background: #f8f8f8;
     padding: 20px;
     border-radius: 8px;
-    width: 150%;
-    margin-left: 150%;
+    width: 100%;
 }
 
-.label {
+.Updatenew-label {
     display: block;
     margin-top: 10px;
+    font-weight: bold;
 }
-input {
+
+.Updatenew-input {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-button {
+.Updatenew-button {
     background: #1890ff;
     color: white;
     border: none;
     cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
 }
-button:hover {
+
+.Updatenew-button:hover {
     background: #0056b3;
 }
