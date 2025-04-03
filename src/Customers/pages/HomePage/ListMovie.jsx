@@ -4,8 +4,6 @@ import { getListMovieService } from "../../api/movieService";
 import { Link } from "react-router-dom";
 import { Button, Card, Carousel, Pagination, Popover } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-
 const { Meta } = Card;
 
 export default function ListMovie() {
@@ -134,37 +132,6 @@ export default function ListMovie() {
         >
           <RightOutlined />
         </button>
-        {/* Danh Sách Phim + Arrow */}
-        <div className="relative flex items-center">
-          {/* Arrow Trái - luôn hiển thị nhưng sẽ mờ đi khi không thể di chuyển trang trước */}
-          <button
-            className={`absolute left-0 z-10 bg-black/50 text-white p-2 rounded-full shadow-lg hover:bg-black transition-all ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)} // Chỉ giảm trang khi có thể
-            disabled={currentPage === 1} // Disabled khi ở trang đầu tiên
-          >
-            <LeftOutlined />
-          </button>
-
-          {/* Danh Sách Phim */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 flex-1">
-            {renderListMovie()}
-          </div>
-
-          {/* Arrow Phải - luôn hiển thị nhưng sẽ mờ đi khi không thể di chuyển trang tiếp */}
-          <button
-            className={`absolute right-0 z-10 bg-black/50 text-white p-2 rounded-full shadow-lg hover:bg-black transition-all ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            onClick={() =>
-              currentPage < totalPages && setCurrentPage(currentPage + 1)
-            } // Chỉ tăng trang khi có thể
-            disabled={currentPage === totalPages} // Disabled khi ở trang cuối
-          >
-            <RightOutlined />
-          </button>
-        </div>
       </div>
     </div>
   );
