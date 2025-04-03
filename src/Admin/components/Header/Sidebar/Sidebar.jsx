@@ -32,6 +32,11 @@ export default function Sidebar() {
           <li className='header-li'>
             <span className='header-span' href="#"><i className="fas fa-tv" /> Showtimes</span>
           </li>
+          <Link to="/">
+          <li className='header-li'>
+            <span className='header-span' href="#"><i className="fa fa-user"></i> Đăng xuất</span>
+          </li>
+          </Link>
         </ul>
       </div>
     </div>

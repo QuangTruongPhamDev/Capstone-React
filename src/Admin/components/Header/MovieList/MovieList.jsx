@@ -84,7 +84,7 @@ export default function MovieList() {
                 <td className='movielist-td'>{movie.tenPhim}</td>
                 <td className='movielist-td'>{movie.moTa.substring(0, 150)}...</td>
                 <td className='movielist-td'>
-                  <button onClick={() => navigate(`/UpdateNewFilmPage/${movie.maPhim}`)} className="movielist-btn-edit">
+                  <button onClick={() => navigate(`/UpdateNewFilmPage?=${movie.maPhim}`)} className="movielist-btn-edit">
                   <i className="fas fa-edit" />
                   </button>
                   <button onClick={() => deleteFilm(movie.maPhim)} className="movielist-btn-delete">
