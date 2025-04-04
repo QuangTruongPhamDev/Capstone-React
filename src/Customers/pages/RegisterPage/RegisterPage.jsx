@@ -18,8 +18,12 @@ export default function RegisterPage() {
       const response = await registerUserService(values);
       console.log("Đăng ký thành công:", response);
 
+      // Lưu thông tin user vào Redux
+      dispatch(saveUser(response.data));
+
       message.success("Đăng ký thành công!");
-      setTimeout(() => navigate("/login"), 1000);
+      // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
+      setTimeout(() => navigate("/login"), 500); // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
     } catch (error) {
       console.error("Lỗi đăng ký:", error);
 

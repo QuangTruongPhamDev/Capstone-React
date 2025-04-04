@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import loginAnimation from "../../../assets/Animation - 1743332484387.json";
 import { useDispatch } from "react-redux";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginService } from "../../api/userService";
 import { setUserAction } from "../../redux/userSlice";
 import toast from "react-hot-toast";
@@ -18,7 +18,6 @@ export default function LoginPage() {
       .then((res) => {
         const user = res.data.content;
         dispatch(setUserAction(user));
-        localStorage.setItem("USER", JSON.stringify(user));
 
         // Kiểm tra quyền và điều hướng
         if (user.maLoaiNguoiDung === "QuanTri") {

@@ -26,29 +26,10 @@ function App() {
         <Toaster />
         <Routes>
           <Route path="/" element={<Template content={<HomePage />} />} />;
-          <Route
-            path="/login"
-            element={
-              <Template
-                content={
-                  <CheckUser>
-                    <LoginPage />
-                  </CheckUser>
-                }
-              />
-            }
-          />
+          <Route path="/login" element={<Template content={<LoginPage />} />} />
           <Route
             path="/register"
-            element={
-              <Template
-                content={
-                  <CheckUser>
-                    <RegisterPage />
-                  </CheckUser>
-                }
-              />
-            }
+            element={<Template content={<RegisterPage />} />}
           />
           <Route
             path="/detail/:id"
