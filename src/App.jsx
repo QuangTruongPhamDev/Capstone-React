@@ -15,6 +15,7 @@ import AdminPage from "./Admin/pages/AdminPage/AdminPage";
 import AddNewFilmPage from "./Admin/pages/AddNewFilmPage/AddNewFilmPage";
 import UpdateNewFilmPage from "./Admin/pages/UpdateNewFilmPage/UpdateNewFilmPage";
 import Template_Admin from "./Admin/template_admin/template_admin";
+import Profile from "./Customers/pages/Profile/Profile";
 import UserPage from "./Admin/pages/UserPage/UserPage";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             path="/chitietphongve/:maLichChieu"
             element={<Template_Booking content={<BookingTicketsPage />} />}
           />
+          <Route path="/profile" element={<Template content={<Profile />} />} />
           <Route
             path="/AdminPage"
             element={<Template_Admin content={<AdminPage />} />}

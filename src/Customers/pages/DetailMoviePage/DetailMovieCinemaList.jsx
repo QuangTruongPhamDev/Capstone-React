@@ -24,7 +24,7 @@ export default function DetailMovieCinemaList() {
             key={cinema.maHeThongRap}
             className={`cursor-pointer p-2 rounded-lg flex items-center gap-4 border ${
               selectedCinema?.maHeThongRap === cinema.maHeThongRap
-                ? "border-red-500"
+                ? "border-orange-500"
                 : "border-gray-300"
             } hover:border-red-500 transition`}
             onClick={() => setSelectedCinema(cinema)}
@@ -50,7 +50,7 @@ export default function DetailMovieCinemaList() {
                   <Link
                     to={`/chitietphongve/${lichChieu.maLichChieu}`}
                     key={lichChieu.maLichChieu}
-                    className="bg-red-500 text-white text-center py-2 rounded-lg hover:bg-red-600 transition"
+                    className="bg-orange-500 text-white text-center py-2 rounded-lg hover:bg-red-600 transition"
                   >
                     {new Date(lichChieu.ngayChieuGioChieu).toLocaleDateString()}{" "}
                     ~

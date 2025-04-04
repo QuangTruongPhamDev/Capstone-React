@@ -57,7 +57,7 @@ export default function DetailMoviePage() {
             {/* Trailer Button */}
             <button
               onClick={() => setIsTrailerOpen(true)}
-              className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg flex items-center gap-2"
             >
               <PlayCircleOutlined className="text-2xl" /> Trailer
             </button>

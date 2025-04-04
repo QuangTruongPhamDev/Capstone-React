@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getRoomDetailService } from "../api/cinemaService";
+import { fetchRoomData } from "./bookingThunk";
 
 export const fetchRoomDetail = createAsyncThunk(
   "booking/fetchRoomDetail",
@@ -14,6 +15,7 @@ const initialState = {
   loading: false,
   error: null,
   selectedSeats: [],
+  bookedTickets: [], // Lưu lịch sử vé đã đặt
 };
 
 const bookingSlice = createSlice({
@@ -39,6 +41,9 @@ const bookingSlice = createSlice({
     resetSelection: (state) => {
       state.selectedSeats = [];
     },
+    saveTicket: (state, action) => {
+      state.bookedTickets.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -53,10 +58,13 @@ const bookingSlice = createSlice({
       .addCase(fetchRoomDetail.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchRoomData.fulfilled, (state, action) => {
+        state.roomData = action.payload;
       });
   },
 });
 
-export const { selectSeat, resetSelection } = bookingSlice.actions;
+export const { selectSeat, resetSelection, saveTicket } = bookingSlice.actions;
 
 export default bookingSlice.reducer;
