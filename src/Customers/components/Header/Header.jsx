@@ -162,7 +162,7 @@ export default function Header() {
           onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle menu for small screens
         >
           <img
-            src="https://www.svgrepo.com/show/452030/avatar-default.svg"
+            src="/images/avatar.png"
             alt="User Avatar"
             className="w-full h-full object-cover"
           />
