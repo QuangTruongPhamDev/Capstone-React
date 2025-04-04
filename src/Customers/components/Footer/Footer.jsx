@@ -98,7 +98,7 @@ export default function Footer() {
               className="hover:scale-110 transition"
             >
               <img
-                src="/images/facebook_icon.png"
+                src="/images/facebook_icon.pn"
                 alt="Facebook"
                 className="w-8 h-8"
               />

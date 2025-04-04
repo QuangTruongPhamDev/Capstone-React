@@ -4,7 +4,9 @@ import { getUserInfoService } from "../api/userService";
 let userData = null;
 try {
   const userJson = localStorage.getItem("USER");
-  userData = JSON.parse(userJson) || null; // Đảm bảo dữ liệu hợp lệ
+  if (userJson) {
+    userData = JSON.parse(userJson);
+  }
 } catch (error) {
   console.error("Error parsing user data:", error);
 }

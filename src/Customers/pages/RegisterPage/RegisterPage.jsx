@@ -13,21 +13,24 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
+    values.maNhom = "GP01";
     try {
-      console.log("Dữ liệu gửi đi: ", values); // In ra dữ liệu trước khi gửi
-      values.maNhom = "GP01"; // Nhóm mặc định
-      await registerUserService(values); // Gọi API đăng ký
+      const response = await registerUserService(values);
+      console.log("Đăng ký thành công:", response);
 
-      message.success("Đăng ký thành công!"); // Hiển thị thông báo
+      // Lưu thông tin user vào Redux
+      dispatch(saveUser(response.data));
 
-      // Chuyển hướng đến trang đăng nhập sau 1s
-      setTimeout(() => navigate("/login"), 1000);
+      message.success("Đăng ký thành công!");
+      // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
+      setTimeout(() => navigate("/login"), 500); // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
     } catch (error) {
-      // Kiểm tra lỗi API trả về
+      console.error("Lỗi đăng ký:", error);
+
       if (error.response) {
         const errorMessage =
           error.response.data?.content || "Đăng ký thất bại!";
-        message.error(errorMessage); // Hiển thị thông báo lỗi
+        message.error(errorMessage);
       } else if (error.request) {
         message.error("Không thể kết nối với máy chủ. Vui lòng thử lại!");
       } else {
