@@ -16,6 +16,7 @@ import AddNewFilmPage from "./Admin/pages/AddNewFilmPage/AddNewFilmPage";
 import UpdateNewFilmPage from "./Admin/pages/UpdateNewFilmPage/UpdateNewFilmPage";
 import Template_Admin from "./Admin/template_admin/template_admin";
 import Profile from "./Customers/pages/Profile/Profile";
+import CheckUser from "./Customers/HOC/CheckUser";
 
 function App() {
   return (
@@ -25,10 +26,29 @@ function App() {
         <Toaster />
         <Routes>
           <Route path="/" element={<Template content={<HomePage />} />} />;
-          <Route path="/login" element={<Template content={<LoginPage />} />} />
+          <Route
+            path="/login"
+            element={
+              <Template
+                content={
+                  <CheckUser>
+                    <LoginPage />
+                  </CheckUser>
+                }
+              />
+            }
+          />
           <Route
             path="/register"
-            element={<Template content={<RegisterPage />} />}
+            element={
+              <Template
+                content={
+                  <CheckUser>
+                    <RegisterPage />
+                  </CheckUser>
+                }
+              />
+            }
           />
           <Route
             path="/detail/:id"
