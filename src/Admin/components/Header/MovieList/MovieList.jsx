@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAdminService } from "../../../api/adminService";
-import { deleteFilm } from "../../../api/deleteService";
 import MovieForm from "../MovieForm";
 import "./index.css"
-import { updateMovie } from "../../../api/updateNewService";
+import { deleteMovieService } from "../../../api/deleteMovieService";
+
 
 export default function MovieList() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function MovieList() {
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     getAdminService()
@@ -25,22 +25,38 @@ export default function MovieList() {
       });
   }, []);
 
-  const handleDelete = async (maPhim) => {
-    const confirmDelete = window.confirm("Bạn có chắc muốn xóa phim này?");
-    if (!confirmDelete) return;
-
-    try {
-      const success = await deleteFilm(maPhim);
-      if (success) {
-        setMovies((prevMovies) => prevMovies.filter((movie) => movie.maPhim !== maPhim));
-      } else {
-        alert("Xóa phim thất bại, vui lòng thử lại.");
-      }
-    } catch (err) {
-      console.error("Lỗi khi xóa phim:", err);
-      alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+  const handleDelete = (maPhim) => {
+    if (window.confirm("Bạn có chắc muốn xóa phim này không?")) {
+      deleteMovieService(maPhim)
+        .then(() => {
+          alert("Xóa phim thành công!");
+          setMovies(movies.filter(movie => movie.maPhim !== maPhim)); // Cập nhật danh sách
+        })
+        .catch(error => {
+          console.error("Lỗi khi xóa phim:", error);
+          alert("Xóa phim thất bại!");
+        });
     }
   };
+
+  useEffect(() => {
+    // Hàm để xử lý việc thêm phim mới
+    const handleNewMovie = () => {
+      const newMovie = JSON.parse(localStorage.getItem("newMovie"));
+      if (newMovie) {
+        setMovies((prevMovies) => [...prevMovies, newMovie]);
+        localStorage.removeItem("newMovie"); // Xóa dữ liệu sau khi đã thêm
+      }
+    };
+
+    // Lắng nghe sự kiện "newMovieAdded"
+    window.addEventListener("newMovieAdded", handleNewMovie);
+
+    // Dọn dẹp khi component bị hủy
+    return () => {
+      window.removeEventListener("newMovieAdded", handleNewMovie);
+    };
+  }, []);
 
   const filteredMovies = movies.filter((movie) =>
     movie.tenPhim.toLowerCase().includes(searchTerm.toLowerCase())
@@ -84,10 +100,10 @@ export default function MovieList() {
                 <td className='movielist-td'>{movie.tenPhim}</td>
                 <td className='movielist-td'>{movie.moTa.substring(0, 150)}...</td>
                 <td className='movielist-td'>
-                  <button onClick={() => navigate(`/UpdateNewFilmPage?=${movie.maPhim}`)} className="movielist-btn-edit">
-                  <i className="fas fa-edit" />
+                  <button onClick={() => navigate("/UpdateNewFilmPage", { state: { movie } })} className="movielist-btn-edit">
+                    <i className="fas fa-edit" />
                   </button>
-                  <button onClick={() => deleteFilm(movie.maPhim)} className="movielist-btn-delete">
+                  <button onClick={() => handleDelete(movie.maPhim)} className="movielist-btn-delete">
                     <i className="fas fa-trash" />
                   </button>
                 </td>

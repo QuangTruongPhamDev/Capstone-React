@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+
 import "./index.css";
-import { addNewMovie } from "../../../api/addNewService";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addNewMovieService } from "../../../api/addNewMovieService";
+
 
 export default function AddNewFilm() {
   const [addNew, setAddNew] = useState({
+    maPhim: "",
     tenPhim: "",
     trailer: "",
     moTa: "",
@@ -14,39 +16,70 @@ export default function AddNewFilm() {
     sapChieu: false,
     hot: false,
     danhGia: 0,
-    hinhAnh: null,
+    hinhAnh: "", // Đảm bảo hinhAnh là tệp khi người dùng chọn
   });
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
+  // Đảm bảo khi chọn tệp, bạn cập nhật đúng kiểu cho hinhAnh
   const handleChange = (e) => {
-    const { name, type, value, checked, files } = e.target;
-    if (type === "checkbox") {
-      setAddNew({ ...addNew, [name]: checked });
-    } else if (type === "file") {
-      setAddNew({ ...addNew, [name]: files[0] }); // Lưu file ảnh vào state
-    } else {
-      setAddNew({ ...addNew, [name]: value });
-    }
+    const { name, type, checked, value, files } = e.target;
+    setAddNew((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : files ? files[0] : value, // Xử lý đúng với hinhAnh (tệp)
+    }));
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    for (let key in addNew) {
-      formData.append(key, addNew[key]);
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const selectedImage = addNew.hinhAnh;
+
+    // Kiểm tra tệp hình ảnh hợp lệ
+    if (selectedImage && !(selectedImage instanceof File)) {
+      alert("Vui lòng chọn một tệp hình ảnh.");
+      return;
     }
 
-    const success = await addNewMovie(formData); // Gọi API thêm phim
-    if (success) {
-      alert("Thêm phim thành công!");
+    if (selectedImage && !validImageTypes.includes(selectedImage.type)) {
+      alert("Hình ảnh phải có định dạng *.jpg, *.png hoặc *.gif.");
+      return;
+    }
+
+  
+   // Tạo FormData
+   const formData = new FormData();
+   for (let key in addNew) {
+     // Nếu là hình ảnh, append tệp
+     if (key === "hinhAnh" && addNew.hinhAnh instanceof File) {
+       console.log("Hình ảnh được chọn:", addNew.hinhAnh); // Kiểm tra tệp
+       formData.append("hinhAnh", addNew.hinhAnh); // Gửi tên 'hinhAnh' theo yêu cầu của API
+     } else {
+       formData.append(key, addNew[key]); // Append các thuộc tính khác
+     }
+   }
+     // Gửi yêu cầu tới API
+     try {
+      const res = await addNewMovieService(formData);
+      const { data } = res;
+      console.log("Thêm phim thành công:", data.content);
+
+      // Lưu thông tin phim mới vào localStorage (tùy chọn)
+      localStorage.setItem("newMovie", JSON.stringify(data.content));
+
+      // Gửi sự kiện khi phim mới đã được thêm
+      window.dispatchEvent(new Event("newMovieAdded"));
+
+      // Điều hướng về trang quản lý phim
       navigate("/AdminPage");
-    } else {
-      alert("Lỗi khi thêm phim!");
+    } catch (error) {
+      console.error("Lỗi khi thêm phim:", error.response?.data || error.message);
     }
   };
+
+
   return (
     <div className="addnew-body">
       <div className="addnew-content">
@@ -141,7 +174,7 @@ export default function AddNewFilm() {
           />
 
           <div className="addnew-buttons">
-            <button className="addnew-button" type="submit" onClick={() => navigate(addNew.maPhim)}>
+            <button className="addnew-button" type="submit">
               Thêm phim
             </button>
             <button

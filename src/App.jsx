@@ -15,6 +15,7 @@ import AdminPage from "./Admin/pages/AdminPage/AdminPage";
 import AddNewFilmPage from "./Admin/pages/AddNewFilmPage/AddNewFilmPage";
 import UpdateNewFilmPage from "./Admin/pages/UpdateNewFilmPage/UpdateNewFilmPage";
 import Template_Admin from "./Admin/template_admin/template_admin";
+import UserPage from "./Admin/pages/UserPage/UserPage";
 
 function App() {
   return (
@@ -49,6 +50,9 @@ function App() {
             path="/UpdateNewFilmPage"
             element={<Template_Admin content={<UpdateNewFilmPage />} />}
           />
+          <Route
+            path="/UserPage"
+            element={<Template_Admin content={<UserPage />} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
