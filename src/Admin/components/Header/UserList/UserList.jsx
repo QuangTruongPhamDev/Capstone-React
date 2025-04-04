@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./index.css";
-import { getuserService } from "../../../api/userService";
 
 export default function UserList() {
 

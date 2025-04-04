@@ -27,7 +27,7 @@ export default function UpdateFilm() {
                 tenPhim: movie.tenPhim || "",
                 trailer: movie.trailer || "",
                 moTa: movie.moTa || "",
-                ngayKhoiChieu: movie.ngayKhoiChieu || "",
+                ngayKhoiChieu: movie.ngayKhoiChieu?.slice(0, 10) || "",
                 dangChieu: movie.dangChieu || false,
                 sapChieu: movie.sapChieu || false,
                 hot: movie.hot || false,

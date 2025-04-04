@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import MovieList from '../../components/Header/MovieList/MovieList'
 
 export default function AdminPage() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMovie, deleteMovie } from '../../redux/movieSlice';
+import { addMovie } from '../../redux/movieSlice';
 
 export default function MovieForm({ showForm, setShowForm }) {
     const dispatch = useDispatch();

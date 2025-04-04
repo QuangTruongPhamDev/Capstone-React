@@ -27,7 +27,7 @@ export default function MovieList() {
 
   const handleDelete = (maPhim) => {
     if (window.confirm("Bạn có chắc muốn xóa phim này không?")) {
-      deleteMovieService(maPhim)
+     deleteMovieService(maPhim)
         .then(() => {
           alert("Xóa phim thành công!");
           setMovies(movies.filter(movie => movie.maPhim !== maPhim)); // Cập nhật danh sách
@@ -88,7 +88,7 @@ export default function MovieList() {
               <th className='movielist-th'>Tên phim</th>
               <th className='movielist-th'>Mô tả</th>
               <th className='movielist-th'>Hành động</th>
-            </tr>
+            </tr> 
           </thead>
           <tbody>
             {filteredMovies.map(movie => (

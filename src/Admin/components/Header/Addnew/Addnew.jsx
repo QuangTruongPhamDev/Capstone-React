@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "./index.css";
-import { useLocation, useNavigate } from "react-router-dom";
-import { addNewMovieService } from "../../../api/addNewMovieService";
+import { useNavigate } from "react-router-dom";
+import { addNewMovie } from "../../../api/addNewMovieService";
 
 
 export default function AddNewFilm() {
@@ -33,49 +33,31 @@ export default function AddNewFilm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    const selectedImage = addNew.hinhAnh;
-
-    // Kiểm tra tệp hình ảnh hợp lệ
-    if (selectedImage && !(selectedImage instanceof File)) {
-      alert("Vui lòng chọn một tệp hình ảnh.");
-      return;
-    }
-
-    if (selectedImage && !validImageTypes.includes(selectedImage.type)) {
-      alert("Hình ảnh phải có định dạng *.jpg, *.png hoặc *.gif.");
-      return;
-    }
-
   
-   // Tạo FormData
-   const formData = new FormData();
-   for (let key in addNew) {
-     // Nếu là hình ảnh, append tệp
-     if (key === "hinhAnh" && addNew.hinhAnh instanceof File) {
-       console.log("Hình ảnh được chọn:", addNew.hinhAnh); // Kiểm tra tệp
-       formData.append("hinhAnh", addNew.hinhAnh); // Gửi tên 'hinhAnh' theo yêu cầu của API
-     } else {
-       formData.append(key, addNew[key]); // Append các thuộc tính khác
-     }
-   }
-     // Gửi yêu cầu tới API
-     try {
-      const res = await addNewMovieService(formData);
-      const { data } = res;
-      console.log("Thêm phim thành công:", data.content);
-
-      // Lưu thông tin phim mới vào localStorage (tùy chọn)
-      localStorage.setItem("newMovie", JSON.stringify(data.content));
-
-      // Gửi sự kiện khi phim mới đã được thêm
-      window.dispatchEvent(new Event("newMovieAdded"));
-
-      // Điều hướng về trang quản lý phim
+    const formData = new FormData();
+    for (let key in addNew) {
+      if (key === "ngayKhoiChieu" && addNew[key]) {
+        const date = new Date(addNew[key]);
+        const formattedDate = `${date.getDate().toString().padStart(2, "0")}/${
+          (date.getMonth() + 1).toString().padStart(2, "0")
+        }/${date.getFullYear()}`;
+        formData.append(key, formattedDate);
+      } else {
+        formData.append(key, addNew[key]);
+      }
+    }
+  
+    // Log formData để kiểm tra dữ liệu
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+  
+    const success = await addNewMovie(formData); // Gọi API thêm phim
+    if (success) {
+      alert("Thêm phim thành công!");
       navigate("/AdminPage");
-    } catch (error) {
-      console.error("Lỗi khi thêm phim:", error.response?.data || error.message);
+    } else {
+      alert("Lỗi khi thêm phim!");
     }
   };
 
