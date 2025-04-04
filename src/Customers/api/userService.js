@@ -10,7 +10,16 @@ export const registerUserService = (user) => {
   const url = `/api/QuanLyNguoiDung/DangKy`;
   return https.post(url, user);
 };
-export const getUserInfoService = (userId) => {
-  const url = `/api/QuanLyNguoiDung/ThongTinTaiKhoan?TaiKhoan=${userId}`;
-  return https.get(url);
+
+export const getUserInfoService = async () => {
+  try {
+    const response = await https.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
+    return response.data.content.thongTinDatVe; // Đảm bảo rằng response có trường thongTinDatVe
+  } catch (error) {
+    throw new Error(error.response.data || "Lỗi lấy thông tin người dùng");
+  }
+};
+
+export const updateUserInfoService = (data) => {
+  return https.put("/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung", data);
 };

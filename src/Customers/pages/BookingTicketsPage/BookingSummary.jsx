@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetSelection } from "../../redux/bookingSlice";
+import { resetSelection, saveTicket } from "../../redux/bookingSlice";
+import { bookedTicketService } from "../../api/bookingService";
+import { fetchRoomData } from "../../redux/bookingThunk";
+import { fetchBookingHistory } from "../../redux/userSlice";
 
 export default function BookingSummary() {
   const dispatch = useDispatch();
@@ -14,29 +17,60 @@ export default function BookingSummary() {
   );
 
   // Kiểm tra trạng thái đăng nhập
-  const user = useSelector((state) => state.userSlice.user); // Giả sử người dùng lưu trong redux
+  const user = useSelector((state) => state.userSlice.user); // Người dùng lưu trong redux
 
   // Trạng thái thông báo
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Hàm xử lý thanh toán
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!user) {
-      // Nếu chưa đăng nhập
-      setPaymentError("Vui lòng đăng nhập để thực hiện thanh toán.");
-      setPaymentSuccess(false);
-    } else {
-      // Nếu đã đăng nhập
+      setPaymentError("Vui lòng đăng nhập để thanh toán.");
+      return;
+    }
+
+    if (selectedSeats.length === 0) {
+      setPaymentError("Bạn chưa chọn ghế.");
+      return;
+    }
+
+    setLoading(true);
+    setPaymentError(null);
+
+    const bookingData = {
+      maLichChieu: roomData.thongTinPhim.maLichChieu,
+      danhSachVe: selectedSeats.map((seat) => ({
+        maGhe: seat.maGhe,
+        giaVe: seat.giaVe,
+      })),
+    };
+
+    try {
+      await bookedTicketService(bookingData);
+
+      // Gọi API để cập nhật lại danh sách ghế đã đặt
+      dispatch(fetchRoomData(roomData?.thongTinPhim?.maLichChieu));
+
+      // Gọi lại lịch sử đặt vé để cập nhật Redux
+      dispatch(fetchBookingHistory());
+
       setPaymentSuccess(true);
-      setPaymentError(null);
+      dispatch(resetSelection());
+    } catch (error) {
+      setPaymentError("Thanh toán thất bại. Vui lòng thử lại!");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <div className="px-4 py-6 max-w-4xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Thông tin đặt vé</h2>
+
       {roomData && (
-        <div>
+        <>
           <p>
             <strong>Rạp:</strong> {roomData.thongTinPhim.tenCumRap}
           </p>
@@ -47,6 +81,7 @@ export default function BookingSummary() {
             <strong>Suất chiếu:</strong> {roomData.thongTinPhim.gioChieu} -{" "}
             {roomData.thongTinPhim.ngayChieu}
           </p>
+
           <p className="mt-4">
             <strong>Ghế đã chọn:</strong>
           </p>
@@ -57,20 +92,17 @@ export default function BookingSummary() {
               </li>
             ))}
           </ul>
+
           <p className="mt-4 text-lg font-bold">
             Tổng tiền: {totalPrice.toLocaleString()}đ
           </p>
 
-          {/* Thông báo lỗi nếu chưa đăng nhập */}
           {paymentError && <p className="text-red-500 mt-4">{paymentError}</p>}
-
-          {/* Thông báo thành công nếu đã thanh toán */}
-          {paymentSuccess && !paymentError && (
-            <p className="text-green-500 mt-4">
-              Đặt vé thành công! Cảm ơn bạn đã đặt vé.
-            </p>
+          {paymentSuccess && (
+            <p className="text-green-500 mt-4">Đặt vé thành công!</p>
           )}
 
+          {/* Responsive Button Section */}
           <div className="mt-4 flex flex-col sm:flex-row sm:space-x-4">
             <button
               className="w-full sm:w-auto bg-red-500 text-white px-4 py-2 rounded mb-4 sm:mb-0"
@@ -81,11 +113,12 @@ export default function BookingSummary() {
             <button
               className="w-full sm:w-auto bg-green-500 text-white px-4 py-2 rounded"
               onClick={handlePayment}
+              disabled={loading}
             >
-              Thanh toán
+              {loading ? "Đang xử lý..." : "Thanh toán"}
             </button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

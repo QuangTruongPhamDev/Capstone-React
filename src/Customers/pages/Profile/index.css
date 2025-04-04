@@ -1,0 +1,74 @@
+.profile-container {
+  padding-top: 60px;
+  background-image: url("/images/background_app.jpg"); /* Thay thế với URL ảnh bạn muốn */
+  background-size: cover;
+  background-position: center;
+  color: white; /* Chữ màu trắng */
+  position: relative; /* Để sử dụng lớp phủ đen mờ */
+}
+
+.profile-container .content {
+  position: relative;
+  z-index: 2; /* Đảm bảo nội dung hiển thị lên trên lớp phủ */
+}
+
+.tabs {
+  display: flex;
+  margin-top: 40px; /* Tạo khoảng cách giữa header và tabs */
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.tab-button.active {
+  background-color: #ea580c;
+  color: white;
+}
+
+.tab-button:hover {
+  background-color: #f97316;
+}
+
+.tab-content {
+  margin-top: 20px;
+}
+
+.input-container {
+  margin-bottom: 20px; /* Khoảng cách giữa các input field */
+}
+
+.input-container label {
+  display: block;
+  font-weight: bold; /* Làm đậm chữ label */
+  margin-bottom: 8px; /* Khoảng cách giữa label và input */
+  text-align: left; /* Căn trái hoặc căn giữa tùy theo yêu cầu */
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px; /* Khoảng cách giữa label và input */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-button {
+  background-color: #ff6600; /* Màu cam */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.update-button:disabled {
+  background-color: #ccc;
+  color: black;
+}
