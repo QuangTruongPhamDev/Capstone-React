@@ -124,10 +124,10 @@ export default function Header() {
           {user ? (
             <>
               <Link
-                to="/edit-profile"
+                to="/profile"
                 className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
               >
-                Chỉnh sửa thông tin cá nhân
+                Thông tin cá nhân
               </Link>
               <span
                 onClick={handleLogout}
@@ -173,10 +173,10 @@ export default function Header() {
             {user ? (
               <>
                 <Link
-                  to="/edit-profile"
+                  to="/profile"
                   className="block py-2 px-4 rounded hover:bg-gray-800 hover:text-orange-500 transition"
                 >
-                  Chỉnh sửa thông tin cá nhân
+                  Thông tin cá nhân
                 </Link>
                 <span
                   onClick={handleLogout}

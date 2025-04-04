@@ -18,14 +18,13 @@ export default function SeatSelection() {
   };
   return (
     <div className="flex flex-col items-center space-y-6">
-      {/* Màn hình */}
       <div className="w-full bg-gray-800 text-white text-center py-3 rounded-md text-lg mb-6">
         MÀN HÌNH
       </div>
 
-      {/* Ghế ngồi */}
-      <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-3">
-        {seats.map((seat) => (
+      {/* Grid for seat buttons */}
+      <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-14 gap-3">
+        {seats?.map((seat) => (
           <button
             key={seat.maGhe}
             onClick={() => handleSelectSeat(seat)}
@@ -40,12 +39,12 @@ export default function SeatSelection() {
                 : "bg-blue-500 text-white"
             }`}
           >
-            {seat.soGhe} {/* Hiển thị số thứ tự ghế */}
+            {seat.soGhe}
           </button>
         ))}
       </div>
 
-      {/* Chú thích màu sắc */}
+      {/* Legend for seat types */}
       <div className="flex flex-wrap justify-center space-x-6 mt-6">
         <div className="flex items-center mb-2">
           <div className="w-5 h-5 bg-blue-500 rounded-md mr-2"></div>

@@ -77,15 +77,11 @@ export default function Footer() {
           <h4 className="font-bold text-lg mb-3">MOBILE APP</h4>
           <div className="flex gap-4">
             <a href="/download-ios" className="hover:scale-110 transition">
-              <img
-                src="/path/to/apple-icon.png"
-                alt="iOS"
-                className="w-8 h-8"
-              />
+              <img src="/images/ios_icon.png" alt="iOS" className="w-8 h-8" />
             </a>
             <a href="/download-android" className="hover:scale-110 transition">
               <img
-                src="/path/to/android-icon.png"
+                src="/images/android_icon.png"
                 alt="Android"
                 className="w-8 h-8"
               />
@@ -102,17 +98,13 @@ export default function Footer() {
               className="hover:scale-110 transition"
             >
               <img
-                src="/path/to/facebook-icon.png"
+                src="/images/facebook_icon.png"
                 alt="Facebook"
                 className="w-8 h-8"
               />
             </a>
             <a href="https://zalo.me" className="hover:scale-110 transition">
-              <img
-                src="/path/to/zalo-icon.png"
-                alt="Zalo"
-                className="w-8 h-8"
-              />
+              <img src="/images/zalo_icon.png" alt="Zalo" className="w-8 h-8" />
             </a>
           </div>
         </div>
