@@ -11,11 +11,11 @@ const API_URL = "https://movienew.cybersoft.edu.vn/api/QuanLyPhim";
 
 export const addNewMovie = async (movieData) => {
   try {
-    const userToken = localStorage.getItem("USER");
-    if (!userToken) {
-      console.error("Lỗi: Không có token đăng nhập!");
-      return false;
-    }
+    // const userToken = localStorage.getItem("USER");
+    // if (!userToken) {
+    //   console.error("Lỗi: Không có token đăng nhập!");
+    //   return false;
+    // }
 
     // const formData = new FormData();
     // for (let key in movieData) {
