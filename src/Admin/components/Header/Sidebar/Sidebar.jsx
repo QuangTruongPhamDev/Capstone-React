@@ -11,9 +11,11 @@ export default function Sidebar() {
           <img src="/images/logo_3.png" alt="CyberLearn Logo" className="logo-img" />
         </div>
         <ul className='header-ul'>
+          <Link to="/UserPage">
           <li className='header-li'>
             <span className='header-span' href="#"><i className="fas fa-user" /> Users</span>
           </li>
+          </Link>
           <Link to="/AdminPage">
             <li className="active header-li">
               <span className='header-span' href="#"><i className="fas fa-film" /> Films</span>
@@ -32,6 +34,11 @@ export default function Sidebar() {
           <li className='header-li'>
             <span className='header-span' href="#"><i className="fas fa-tv" /> Showtimes</span>
           </li>
+          <Link to="/">
+          <li className='header-li'>
+            <span className='header-span' href="#"><i className="fa fa-user"></i> Đăng xuất</span>
+          </li>
+          </Link>
         </ul>
       </div>
     </div>

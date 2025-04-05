@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
 import "./index.css";
-import { addNewMovie } from "../../../api/addNewService";
+import { useNavigate } from "react-router-dom";
+import { addNewMovie } from "../../../api/addNewMovieService";
+
 
 export default function AddNewFilm() {
   const [addNew, setAddNew] = useState({
+    maPhim: "",
     tenPhim: "",
     trailer: "",
     moTa: "",
@@ -14,31 +16,42 @@ export default function AddNewFilm() {
     sapChieu: false,
     hot: false,
     danhGia: 0,
-    hinhAnh: null,
+    hinhAnh: "", // Đảm bảo hinhAnh là tệp khi người dùng chọn
   });
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
+  // Đảm bảo khi chọn tệp, bạn cập nhật đúng kiểu cho hinhAnh
   const handleChange = (e) => {
-    const { name, type, value, checked, files } = e.target;
-    if (type === "checkbox") {
-      setAddNew({ ...addNew, [name]: checked });
-    } else if (type === "file") {
-      setAddNew({ ...addNew, [name]: files[0] }); // Lưu file ảnh vào state
-    } else {
-      setAddNew({ ...addNew, [name]: value });
-    }
+    const { name, type, checked, value, files } = e.target;
+    setAddNew((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : files ? files[0] : value, // Xử lý đúng với hinhAnh (tệp)
+    }));
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     for (let key in addNew) {
-      formData.append(key, addNew[key]);
+      if (key === "ngayKhoiChieu" && addNew[key]) {
+        const date = new Date(addNew[key]);
+        const formattedDate = `${date.getDate().toString().padStart(2, "0")}/${
+          (date.getMonth() + 1).toString().padStart(2, "0")
+        }/${date.getFullYear()}`;
+        formData.append(key, formattedDate);
+      } else {
+        formData.append(key, addNew[key]);
+      }
     }
-
+  
+    // Log formData để kiểm tra dữ liệu
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+  
     const success = await addNewMovie(formData); // Gọi API thêm phim
     if (success) {
       alert("Thêm phim thành công!");
@@ -47,6 +60,8 @@ export default function AddNewFilm() {
       alert("Lỗi khi thêm phim!");
     }
   };
+
+
   return (
     <div className="addnew-body">
       <div className="addnew-content">
@@ -141,7 +156,7 @@ export default function AddNewFilm() {
           />
 
           <div className="addnew-buttons">
-            <button className="addnew-button" type="submit" onClick={() => navigate(addNew.maPhim)}>
+            <button className="addnew-button" type="submit">
               Thêm phim
             </button>
             <button
