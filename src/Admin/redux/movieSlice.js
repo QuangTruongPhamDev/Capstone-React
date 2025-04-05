@@ -15,12 +15,6 @@ const movieSlice = createSlice({
     deleteMovie: (state, action) => {
       state.getAdminService.filter((movie) => movie.maPhim != action.payload);
     },
-    // addMovie: (state, action) => {
-    //     state.getAdminService = action.payload;
-    // },
-    // deleteMovie: (state, action) => {
-    //     state.getAdminService = action.payload;
-    // }
   },
 });
 
