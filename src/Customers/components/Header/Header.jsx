@@ -17,8 +17,11 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Điều khiển menu cho màn hình nhỏ
 
   const handleLogout = () => {
-    dispatch(logoutAction());
-    navigate("/login");
+    // Trì hoãn việc đăng xuất trong 2 giây (2000ms)
+    setTimeout(() => {
+      dispatch(logoutAction()); // Thực hiện đăng xuất
+      navigate("/login"); // Chuyển hướng đến trang đăng nhập
+    }, 2000); // Thời gian trì hoãn (2 giây)
   };
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
@@ -162,7 +165,7 @@ export default function Header() {
           onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle menu for small screens
         >
           <img
-            src="https://www.svgrepo.com/show/452030/avatar-default.svg"
+            src="/images/avatar.png"
             alt="User Avatar"
             className="w-full h-full object-cover"
           />

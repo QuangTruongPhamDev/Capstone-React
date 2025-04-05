@@ -16,6 +16,7 @@ import AddNewFilmPage from "./Admin/pages/AddNewFilmPage/AddNewFilmPage";
 import UpdateNewFilmPage from "./Admin/pages/UpdateNewFilmPage/UpdateNewFilmPage";
 import Template_Admin from "./Admin/template_admin/template_admin";
 import Profile from "./Customers/pages/Profile/Profile";
+import CheckUser from "./Customers/HOC/CheckUser";
 import UserPage from "./Admin/pages/UserPage/UserPage";
 
 function App() {
