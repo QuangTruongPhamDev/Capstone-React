@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { updateMovieService } from "../../../api/updateMovieService";
 
 export default function UpdateFilm() {
     const [updateData, setUpdateData] = useState({
@@ -54,10 +55,36 @@ export default function UpdateFilm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Cập nhật phim:", updateData);
-        setUpdateData()
-        // Gọi API cập nhật phim ở đây
-    };
+      
+        // Giả sử bạn có service updateMovieService
+        const formData = new FormData();
+        for (const key in updateData) {
+          if (key === "hinhAnh" && updateData[key]) {
+            formData.append("File", updateData[key]);
+          } else {
+            formData.append(key, updateData[key]);
+          }
+        }
+
+        updateMovieService(formData)
+            .then(() => {
+            // Ghi vào localStorage để trang MovieList tự cập nhật bị động
+            const updatedMovie = {
+                ...updateData,
+                hinhAnh: movie.hinhAnh, // bạn có thể dùng ảnh cũ nếu không upload ảnh mới
+            };
+            localStorage.setItem("updatedMovie", JSON.stringify(updatedMovie));
+            window.dispatchEvent(new Event("movieUpdated"));
+
+            alert("Cập nhật phim thành công!");
+            navigate("/AdminPage");
+            })
+            .catch((err) => {
+            console.error("Lỗi khi cập nhật phim:", err);
+            alert("Cập nhật phim thất bại!");
+            });
+        };
+
 
     return (
         <div className="Updatenew-body">
@@ -92,7 +119,7 @@ export default function UpdateFilm() {
                     <input className="Updatenew-input" type="file" name="hinhAnh" onChange={handleFileChange} accept="image/*" />
 
                     <div className="Updatenew-buttons">
-                        <button className="Updatenew-button" type="submit" onClick={() => navigate("/AdminPage", { state: { updateData } })}>
+                        <button className="Updatenew-button" type="submit" >
                             Cập nhật phim
                         </button>
                         <button className="Updatenew-button" type="button" onClick={() => navigate("/AdminPage")}>

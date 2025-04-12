@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAdminService } from "../../../api/adminService";
 import MovieForm from "../MovieForm";
 import "./index.css"
@@ -14,6 +14,8 @@ export default function MovieList() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+  const location = useLocation();
+
 
   useEffect(() => {
     getAdminService()
@@ -23,7 +25,7 @@ export default function MovieList() {
       .catch((err) => {
         console.error("Lỗi khi tải danh sách phim:", err);
       });
-  }, []);
+  }, [location.state]);
 
   const handleDelete = (maPhim) => {
     if (window.confirm("Bạn có chắc muốn xóa phim này không?")) {
@@ -61,6 +63,23 @@ export default function MovieList() {
   const filteredMovies = movies.filter((movie) =>
     movie.tenPhim.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    const handleUpdatedMovie = () => {
+      const updatedMovie = JSON.parse(localStorage.getItem("updatedMovie"));
+      if (updatedMovie) {
+        setMovies((prevMovies) =>
+          prevMovies.map((movie) =>
+            movie.maPhim === updatedMovie.maPhim ? updatedMovie : movie
+          )
+        );
+        localStorage.removeItem("updatedMovie");
+      }
+    };
+  
+    window.addEventListener("movieUpdated", handleUpdatedMovie);
+    return () => window.removeEventListener("movieUpdated", handleUpdatedMovie);
+  }, []);
 
   return (
     <div className='movielist-body'>
